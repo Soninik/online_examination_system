@@ -13,7 +13,7 @@ class PasswordReset extends Model
         'token'
     ];
 
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $primaryKey = 'email';
 }

@@ -125,9 +125,17 @@ class AuthController extends ResponseController
         return view('auth.forget_password');
     }
 
-    public function resetPassword()
+    public function resetPassword(Request $request)
     {
-        return view('auth.reset_password');
+        $resetUser = PasswordReset::where('token', $request->token)->first();
+
+        if (isset($request->token) && isset($resetUser)) {
+            $user = User::where('email', $resetUser->email)->first();
+
+            return view('auth.reset_password', compact('user'));
+        } else {
+            abort(404);
+        }
     }
 
     public function forgetPasswordStore(Request $request)
@@ -153,6 +161,28 @@ class AuthController extends ResponseController
         } catch (\Exception $e) {
             dd($e->getMessage());
             return $this->fail_api($e->getMessage(), "Student Not Login Successfully !");
+        }
+    }
+
+    public function resetPasswordStore(Request $request)
+    {
+        try {
+            $validation = Validator::make($request->all(), [
+                'password' => 'required|min:6',
+                'password_confirmation' => 'required|same:password'
+            ]);
+            if ($validation->fails()) {
+                return $this->send_error($validation->errors(), "Validator Error");
+            }
+            $user = User::where('id', $request->id)->first();
+            User::where('id', $request->id)->update([
+                'password' => Hash::make($request->password)
+            ]);
+
+            PasswordReset::where('email', $user->email)->delete();
+            return $this->send_success("success", "Password Reset Successfully!");
+        } catch (\Exception $e) {
+            return $this->fail_api($e->getMessage(), "Api Fail");
         }
     }
 }

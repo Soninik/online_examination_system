@@ -42,7 +42,7 @@
                             getError(res);
                         } else {
                             alert(res.msg);
-                            window.location.href = res.redirect_url;
+                            {{--  window.location.href = res.redirect_url;  --}}
                         }
                     }
                 });

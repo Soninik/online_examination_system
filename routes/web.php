@@ -19,6 +19,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('forget_password', 'forgetPassword')->name('forgetPassword');
     Route::post('forget_password_store', 'forgetPasswordStore')->name('forget_password_store');
     Route::get('reset_password', 'resetPassword')->name('resetPassword');
+    Route::post('reset_password_store', 'resetPasswordStore')->name('reset_password_store');
 });
 
 
