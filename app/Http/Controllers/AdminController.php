@@ -9,6 +9,6 @@ class AdminController extends Controller
 
     public function index()
     {
-        return "Admin";
+        return view('admin.admin_dashboard');
     }
 }

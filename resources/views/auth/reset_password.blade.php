@@ -27,7 +27,7 @@
             </div>
             <span class="showerror error"></span> <br>
             <button class="btn btn-md btn-success loginBtn">Reset Password</button>
-            <a href="{{ route('login_view') }}" class="btn btn-md btn-dark">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-md btn-dark">Login</a>
         </form>
     </div>
 @endsection
@@ -48,7 +48,7 @@
                             getError(res);
                         } else {
                             alert(res.msg);
-                            window.location.href = "{{ route('login_view') }}";
+                            window.location.href = "{{ route('login') }}";
                         }
                     }
                 });

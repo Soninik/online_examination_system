@@ -79,7 +79,6 @@ class AuthController extends ResponseController
 
     public function storeLogin(Request $request)
     {
-
         try {
             $validation = Validator::make($request->all(), [
                 'email' => 'required',
@@ -93,9 +92,7 @@ class AuthController extends ResponseController
 
                 $user = User::where('id', Auth::user()->id)->first();
                 LoginJob::dispatch($user);
-                // $user->notify(new \App\Notifications\LoginNotification($user));
                 session()->flash('success', 'Login Successfully');
-
                 if (Auth::user()->user_id == 0) {
                     return response()->json(['redirect_url' => route('student_home')]);
                 } else {
@@ -114,7 +111,7 @@ class AuthController extends ResponseController
         if (Auth::check()) {
             // $request->session::flash();
             Auth::logout();
-            return redirect()->route('login_view');
+            return redirect()->route('login');
         } else {
             return back();
         }

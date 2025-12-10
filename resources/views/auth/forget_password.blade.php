@@ -21,7 +21,7 @@
             </div>
             <span class="showerror error"></span> <br>
             <button class="btn btn-md btn-success loginBtn">Forget Password</button>
-            <a href="{{ route('login_view') }}" class="btn btn-md btn-dark">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-md btn-dark">Login</a>
         </form>
     </div>
 @endsection
@@ -42,6 +42,7 @@
                             getError(res);
                         } else {
                             alert(res.msg);
+                            $("#forgetPasswordForm")[0].reset();
                             {{--  window.location.href = res.redirect_url;  --}}
                         }
                     }

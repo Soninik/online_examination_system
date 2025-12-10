@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentController;
@@ -13,7 +14,7 @@ Route::get('/', function () {
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'studentRegister')->name('register_view');
     Route::post('register_store', 'storeRegister')->name('store_register');
-    Route::get('login', 'studentLogin')->name('login_view');
+    Route::get('login', 'studentLogin')->name('login');
     Route::post('login_store', 'storeLogin')->name('store_login');
     Route::get('logout', 'logout')->name('logout');
     Route::get('forget_password', 'forgetPassword')->name('forgetPassword');
@@ -34,4 +35,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('admin', 'index')->name('admin_home');
     });
+
+    Route::resource('subject', SubjectController::class);
 });

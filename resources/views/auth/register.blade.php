@@ -35,7 +35,7 @@
                 <span class="error" id="error-confirm_password"></span>
             </div>
             <button class="btn btn-md btn-success registerBtn">Register</button>
-            <a href="{{ route('login_view') }}" class="btn btn-md btn-dark">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-md btn-dark">Login</a>
         </form>
     </div>
 @endsection
@@ -58,7 +58,7 @@
                         } else {
                             $("#registerForm")[0].reset();
                             alert(res.msg)
-                            window.location.href = "{{ route('login_view') }}";
+                            window.location.href = "{{ route('login') }}";
                         }
                     }
                 });
