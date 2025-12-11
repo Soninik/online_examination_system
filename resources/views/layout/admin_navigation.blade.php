@@ -14,6 +14,9 @@
                     <a href="{{ route('subject.index') }}"><span class="fa fa-home mr-3"></span> Subject</a>
                 </li>
                 <li class="active">
+                    <a href="{{ route('exam.index') }}"><span class="fa fa-home mr-3"></span> Exam</a>
+                </li>
+                <li class="active">
                     <a href="{{ route('logout') }}"><span class="fa fa-logout mr-3"></span> Logout</a>
                 </li>
 

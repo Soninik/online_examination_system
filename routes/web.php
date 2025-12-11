@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
@@ -35,6 +36,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('admin', 'index')->name('admin_home');
     });
-
     Route::resource('subject', SubjectController::class);
+    Route::resource('exam', ExamController::class);
 });

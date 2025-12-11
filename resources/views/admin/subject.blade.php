@@ -125,21 +125,42 @@
         $(".deleteSub").click(function(e) {
             let id = $(this).data('id');
             e.preventDefault();
-            $.ajax({
-                type: "DELETE",
-                url: "{{ url('subject') }}/" + id,
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: id
-                },
-                datatype: "json",
-                success: function(res) {
-                    console.log(res);
-                    if (res.success) {
-                        window.location.reload();
-                    }
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    $.ajax({
+                        type: "DELETE",
+                        url: "{{ url('subject') }}/" + id,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id
+                        },
+                        datatype: "json",
+                        success: function(res) {
+                            console.log(res);
+                            if (res.success) {
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: res.msg,
+                                    icon: "success"
+                                });
+                                window.location.reload();
+                            }
+                        }
+                    });
                 }
             });
+
+
         });
 
         function errorFunction(res) {
